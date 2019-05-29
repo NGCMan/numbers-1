@@ -1,6 +1,6 @@
 number = {
   mag: 0,
-  tlayer: 0;
+  tlayer: 0
 };
 setInterval(function() {
   number.mag++;
