@@ -10,9 +10,13 @@ function commaNumber(x) {
     return x;
 };
 setInterval(function() {
-  number.mag++;
+  if(number.mag < 2000 && number.tlayer == 0){
+    number.mag++;
+  } else {
+    number.mag*=Math.pow(1.01,0.05);
+  }
   updt();
 }, 50);
 function updt() {
-  document.getElementById("number").innerHTML = commaNumber(number.mag);
+  document.getElementById("number").innerHTML = commaNumber(Math.round(number.mag));
 };
