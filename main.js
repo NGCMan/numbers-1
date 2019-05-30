@@ -22,7 +22,7 @@ setInterval(function() {
 }, 50);
 function updt() {
   if(number.mag >= 1e10){
-    number.mag = Math.log(number.mag);
+    number.mag = Math.log10(number.mag);
     number.tlayer++;
   }
   if(number.tlayer == 0){
