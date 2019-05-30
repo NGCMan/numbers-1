@@ -16,7 +16,7 @@ setInterval(function() {
   } else if(number.tlayer == 0) {
     number.mag*=Math.pow(10,1/4620);
   } else {
-    number.mag+=1/4620;
+    number.mag*=1/46200;
   }
   updt();
 }, 50);
