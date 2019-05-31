@@ -31,6 +31,6 @@ function updt() {
   if(number.tlayer == 0){
     document.getElementById("number").innerHTML = commaNumber(Math.round(number.mag));
   } else {
-    document.getElementById("number").innerHTML = Math.pow(10,number.mag%1).toFixed(6) + " × 10<sup>" + Math.floor(number.mag) + "</sup>";
+    document.getElementById("number").innerHTML = Math.pow(10,number.mag%1).toFixed(6) + " × 10<sup>" + commaNumber(Math.floor(number.mag)) + "</sup>";
   }
 };
