@@ -32,7 +32,7 @@ function updt() {
     number.tlayer++;
     frs = 0;
   }
-  mlt = 1+(number.tlayer/5);
+  mlt = Math.pow(1.1,number.tlayer);
   prc = 1+(mlt/100);
   dnm = 1/Math.log10(prc)*20;
   if(number.tlayer == 0){
