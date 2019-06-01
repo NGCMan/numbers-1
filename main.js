@@ -4,6 +4,7 @@ var number = {
 };
 var mlt = 1;
 var dnm = 4620;
+var prc = 1.01;
 var frs = 0;
 function commaNumber(x) {
     x = x.toString();
@@ -32,6 +33,7 @@ function updt() {
     frs = 0;
   }
   mlt = 1+(number.tlayer/5);
+  prc = 1+(mlt/100);
   dnm = 1/log10(prc)*20;
   if(number.tlayer == 0){
     document.getElementById("number").innerHTML = commaNumber(Math.round(number.mag));
