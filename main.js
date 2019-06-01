@@ -41,5 +41,9 @@ function updt() {
     document.getElementById("number").innerHTML = Math.pow(10,number.mag%1).toFixed(6) + " × 10<sup>" + commaNumber(Math.floor(number.mag)) + "</sup>";
   } else if(number.tlayer == 2) {
     document.getElementById("number").innerHTML = "10<sup>" + Math.pow(10,number.mag%1).toFixed(6) + " × 10<sup>" + commaNumber(Math.floor(number.mag)) + "</sup></sup>";
+  } else if(number.tlayer == 3) {
+    document.getElementById("number").innerHTML = "10<sup>10<sup>" + Math.pow(10,number.mag%1).toFixed(6) + " × 10<sup>" + commaNumber(Math.floor(number.mag)) + "</sup></sup></sup>";
+  } else if(number.tlayer == 4) {
+    document.getElementById("number").innerHTML = "10<sup>10<sup>10<sup>" + Math.pow(10,number.mag%1).toFixed(6) + " × 10<sup>" + commaNumber(Math.floor(number.mag)) + "</sup></sup></sup></sup>";
   }
 };
