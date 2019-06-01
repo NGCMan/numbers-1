@@ -34,7 +34,7 @@ function updt() {
   }
   mlt = 1+(number.tlayer/5);
   prc = 1+(mlt/100);
-  dnm = 1/log10(prc)*20;
+  dnm = 1/Math.log10(prc)*20;
   if(number.tlayer == 0){
     document.getElementById("number").innerHTML = commaNumber(Math.round(number.mag));
   } else if(number.tlayer == 1) {
