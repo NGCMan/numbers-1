@@ -48,6 +48,6 @@ function updt() {
   } else if(number.tlayer == 5) {
     document.getElementById("number").innerHTML = "10<sup>10<sup>10<sup>10<sup>" + Math.pow(10,number.mag%1).toFixed(6) + " × 10<sup>" + commaNumber(Math.floor(number.mag)) + "</sup></sup></sup></sup></sup>";
   } else {
-    document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(4) + "E" + commaNumber(Math.floor(number.mag)) + "#" + number.tlayer;
+    document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(4) + "E" + commaNumber(Math.floor(number.mag)) + "#" + number.tlayer-1;
   }
 };
