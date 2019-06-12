@@ -46,7 +46,7 @@ function updt() {
   if(nlock == 0){
     mlt = Math.pow(1.1,number.tlayer);
   } else if(nlock == 1){
-    mlt = Math.pow(Math.pow(1.21,number.pelayer),number.tlayer);
+    mlt = Math.pow(Math.pow(1.21,number.pelayer),number.tlayer+1);
   }
   prc = 1+(mlt/100);
   dnm = 1/Math.log10(prc)*20;
