@@ -16,7 +16,7 @@ function commaNumber(x) {
     return x;
 };
 setInterval(function() {
-  if(number.mag < ((1/pow(1.21,number.pelayer))*2000) && number.tlayer == 0){
+  if(number.mag < ((1/Math.pow(1.21,number.pelayer))*2000) && number.tlayer == 0){
     number.mag++;
   } else if(number.tlayer == 0) {
     number.mag*=Math.pow(10,1/dnm);
