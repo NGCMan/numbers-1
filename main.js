@@ -16,7 +16,7 @@ function commaNumber(x) {
     return x;
 };
 setInterval(function() {
-  if(number.mag < 2000 && number.tlayer == 0){
+  if(number.mag < ((1/pow(1.21,number.pelayer))*2000) && number.tlayer == 0){
     number.mag++;
   } else if(number.tlayer == 0) {
     number.mag*=Math.pow(10,1/dnm);
@@ -43,7 +43,11 @@ function updt() {
       nlock++;
     }
   }
-  mlt = Math.pow(1.1,number.tlayer);
+  if(nlock == 0){
+    mlt = Math.pow(1.1,number.tlayer);
+  } else if(nlock == 1){
+    mlt = Math.pow(Math.pow(1.21,number.pelayer),number.tlayer);
+  }
   prc = 1+(mlt/100);
   dnm = 1/Math.log10(prc)*20;
   if(number.tlayer == 0 && number.pelayer == 0){
