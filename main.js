@@ -15,9 +15,9 @@ function commaNumber(x) {
     while (pattern.test(x))
         x = x.replace(pattern, "$1,$2");
     return x;
-};
+}
 setInterval(function() {
-  if(number.mag < ((1/mlt*2000) && number.tlayer == 0){
+  if(number.mag < ((1/mlt*2000) && number.tlayer == 0)){
     number.mag++;
   } else if(number.tlayer == 0) {
     number.mag*=Math.pow(10,1/dnm);
@@ -44,7 +44,7 @@ function updt() {
       nlock++;
     }
   }
-  if(number.mag == NaN){
+  if(number.mag.isNaN){
     number.mag = number.pelayer;
     number.hxlayer++;
     number.pelayer = 0;
@@ -86,4 +86,4 @@ function updt() {
   } else if(number.hxlayer > 0 && number.tlayer > 0) {
     document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(3) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1) + "#" + (number.pelayer+1) + "#" + (number.hxlayer+1);
   }
-};
+}
