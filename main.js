@@ -44,7 +44,7 @@ function updt() {
       nlock++;
     }
   }
-  if(number.mag == NaN){
+  if(isNaN(number.mag)){
     number.mag = number.pelayer;
     number.hxlayer++;
     number.pelayer = 0;
