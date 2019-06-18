@@ -2,7 +2,8 @@ var number = {
   mag: 0,
   tlayer: 0,
   pelayer: 0,
-  hxlayer: 0
+  hxlayer: 0,
+  hplayer: 0
 };
 var mlt = 1;
 var dnm = 4620;
@@ -54,36 +55,53 @@ function updt() {
       nlock++;
     }
   }
+  if(number.mag == 0 && nlock > 0){
+    number.mag = number.hxlayer;
+    number.hplayer++;
+    number.hxlayer = 0;
+    number.pelayer = 0;
+    number.tlayer = 0;
+    frs = 0;
+    if(nlock == 2){
+      nlock++;
+    }
+  }
   if(nlock == 0){
     mlt = Math.pow(1.1,number.tlayer);
   } else if(nlock == 1){
     mlt = Math.pow(Math.pow(1.21,number.pelayer),number.tlayer+1);
   } else if(nlock == 2){
     mlt = Math.pow(Math.pow(Math.pow(1.4641,number.hxlayer),number.pelayer+1),number.tlayer+1);
+  } else if(nlock == 3){
+    mlt = Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(1.1,8),number.hplayer),number.hxlayer+1),number.pelayer+1),number.tlayer+1);
   }
   prc = 1+(mlt/100);
   dnm = 1/Math.log10(prc)*20;
-  if(number.tlayer == 0 && number.pelayer == 0 && number.hxlayer == 0){
+  if(number.tlayer == 0 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0){
     document.getElementById("number").innerHTML = commaNumber(Math.round(number.mag));
-  } else if(number.tlayer == 1 && number.pelayer == 0 && number.hxlayer == 0) {
+  } else if(number.tlayer == 1 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0) {
     document.getElementById("number").innerHTML = Math.pow(10,number.mag%1).toFixed(6) + " × 10<sup>" + commaNumber(Math.floor(number.mag)) + "</sup>";
-  } else if(number.tlayer == 2 && number.pelayer == 0 && number.hxlayer == 0) {
+  } else if(number.tlayer == 2 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0) {
     document.getElementById("number").innerHTML = "10<sup>" + Math.pow(10,number.mag%1).toFixed(6) + " × 10<sup>" + commaNumber(Math.floor(number.mag)) + "</sup></sup>";
-  } else if(number.tlayer == 3 && number.pelayer == 0 && number.hxlayer == 0) {
+  } else if(number.tlayer == 3 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0) {
     document.getElementById("number").innerHTML = "10<sup>10<sup>" + Math.pow(10,number.mag%1).toFixed(6) + " × 10<sup>" + commaNumber(Math.floor(number.mag)) + "</sup></sup></sup>";
-  } else if(number.tlayer == 4 && number.pelayer == 0 && number.hxlayer == 0) {
+  } else if(number.tlayer == 4 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0) {
     document.getElementById("number").innerHTML = "10<sup>10<sup>10<sup>" + Math.pow(10,number.mag%1).toFixed(6) + " × 10<sup>" + commaNumber(Math.floor(number.mag)) + "</sup></sup></sup></sup>";
-  } else if(number.tlayer == 5 && number.pelayer == 0 && number.hxlayer == 0) {
+  } else if(number.tlayer == 5 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0) {
     document.getElementById("number").innerHTML = "10<sup>10<sup>10<sup>10<sup>" + Math.pow(10,number.mag%1).toFixed(6) + " × 10<sup>" + commaNumber(Math.floor(number.mag)) + "</sup></sup></sup></sup></sup>";
-  } else if(number.pelayer == 0 && number.hxlayer == 0) {
+  } else if(number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0) {
     document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(4) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1);
-  } else if(number.pelayer > 0 && number.tlayer == 0 && number.hxlayer == 0) {
+  } else if(number.pelayer > 0 && number.tlayer == 0 && number.hxlayer == 0 && number.hplayer == 0) {
     document.getElementById("number").innerHTML = "E" + commaNumber(Math.round(number.mag)) + "#0#" + (number.pelayer+1);
-  } else if(number.pelayer > 0 && number.tlayer > 0 && number.hxlayer == 0) {
+  } else if(number.pelayer > 0 && number.tlayer > 0 && number.hxlayer == 0 && number.hplayer == 0) {
     document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(4) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1) + "#" + (number.pelayer+1);
-  } else if(number.hxlayer > 0 && number.tlayer == 0) {
+  } else if(number.hxlayer > 0 && number.tlayer == 0 && number.hplayer == 0) {
     document.getElementById("number").innerHTML = "E" + commaNumber(Math.round(number.mag)) + "#0#" + (number.pelayer+1) + "#" + (number.hxlayer+1);
-  } else if(number.hxlayer > 0 && number.tlayer > 0) {
+  } else if(number.hxlayer > 0 && number.tlayer > 0 && number.hplayer == 0) {
     document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(3) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1) + "#" + (number.pelayer+1) + "#" + (number.hxlayer+1);
+  } else if(number.tlayer == 0 && number.hplayer > 0) {
+    document.getElementById("number").innerHTML = "E" + commaNumber(Math.round(number.mag)) + "#0#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1);
+  } else if(number.tlayer > 0 && number.hplayer > 0) {
+    document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(3) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1) + "#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1);
   }
 }
