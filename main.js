@@ -3,7 +3,8 @@ var number = {
   tlayer: 0,
   pelayer: 0,
   hxlayer: 0,
-  hplayer: 0
+  hplayer: 0,
+  olayer: 0
 };
 var mlt = 1;
 var dnm = 4620;
@@ -72,6 +73,18 @@ function updt() {
       nlock++;
     }
   }
+  if(amo == 2){
+    number.mag = number.hplayer;
+    number.olayer++;
+    number.hplayer = 0;
+    number.hxlayer = 0;
+    number.pelayer = 0;
+    number.tlayer = 0;
+    frs = 0;
+    if(nlock == 3){
+      nlock++;
+    }
+  }
   if(nlock == 0){
     mlt = Math.pow(1.1,number.tlayer);
   } else if(nlock == 1){
@@ -80,6 +93,8 @@ function updt() {
     mlt = Math.pow(Math.pow(Math.pow(1.4641,number.hxlayer),number.pelayer+1),number.tlayer+1);
   } else if(nlock == 3){
     mlt = Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(1.1,8),number.hplayer),number.hxlayer+1),number.pelayer+1),number.tlayer+1);
+  } else if(nlock == 4){
+    mlt = Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(1.1,16),number.olayer),number.hplayer+1),number.hxlayer+1),number.pelayer+1),number.tlayer+1);
   }
   prc = 1+(mlt/100);
   dnm = 1/Math.log10(prc)*20;
@@ -109,5 +124,9 @@ function updt() {
     document.getElementById("number").innerHTML = "E" + commaNumber(Math.round(number.mag)) + "#0#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1);
   } else if(number.tlayer > 0 && number.hplayer > 0) {
     document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(3) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1) + "#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1);
+  } else if(number.tlayer == 0 && number.olayer > 0) {
+    document.getElementById("number").innerHTML = "E" + commaNumber(Math.round(number.mag)) + "#0#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1) + "#" + (number.olayer+1);
+  } else if(number.tlayer > 0 && number.olayer > 0) {
+    document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(1) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1) + "#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1) + "#" + (number.olayer+1);
   }
 }
