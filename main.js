@@ -10,6 +10,7 @@ var dnm = 4620;
 var prc = 1.01;
 var frs = 0;
 var nlock = 0;
+var amo = 0;
 function commaNumber(x) {
     x = x.toString();
     var pattern = /(-?\d+)(\d{3})/;
@@ -31,6 +32,11 @@ setInterval(function() {
   updt();
 }, 50);
 function updt() {
+  if(number.mag == 1){
+    amo++;
+  } else {
+    amo=0;
+  }
   if(number.mag >= 1e10){
     number.mag = Math.log10(number.mag);
     number.tlayer++;
