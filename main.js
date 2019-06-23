@@ -33,11 +33,6 @@ setInterval(function() {
   updt();
 }, 50);
 function updt() {
-  if(number.mag == 1){
-    amo++;
-  } else {
-    amo=0;
-  }
   if(number.mag >= 1e10){
     number.mag = Math.log10(number.mag);
     number.tlayer++;
@@ -73,7 +68,7 @@ function updt() {
       nlock++;
     }
   }
-  if(amo == 2){
+  if(amo == 1){
     number.mag = number.hplayer;
     number.olayer++;
     number.hplayer = 0;
@@ -98,6 +93,11 @@ function updt() {
   }
   prc = 1+(mlt/100);
   dnm = 1/Math.log10(prc)*20;
+  if(number.mag == 1){
+    amo++;
+  } else {
+    amo=0;
+  }
   if(number.tlayer == 0 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0){
     document.getElementById("number").innerHTML = commaNumber(Math.round(number.mag));
   } else if(number.tlayer == 1 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0) {
