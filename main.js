@@ -68,7 +68,7 @@ function updt() {
       nlock++;
     }
   }
-  if(amo >= 2){
+  if(amo == 2){
     number.mag = number.hplayer;
     number.olayer++;
     number.hplayer = 0;
