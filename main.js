@@ -31,7 +31,7 @@ setInterval(function() {
     }
   }
   updt();
-}, 50);
+}, 1);
 function updt() {
   if(number.mag >= 1e10){
     number.mag = Math.log10(number.mag);
