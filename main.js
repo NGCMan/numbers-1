@@ -4,7 +4,8 @@ var number = {
   pelayer: 0,
   hxlayer: 0,
   hplayer: 0,
-  olayer: 0
+  olayer: 0,
+  nlayer: 0
 };
 var mlt = 1;
 var dnm = 4620;
@@ -80,6 +81,19 @@ function updt() {
       nlock++;
     }
   }
+  if(amo == 2){
+    number.mag = number.olayer;
+    number.nlayer++;
+    number.olayer = 0;
+    number.hplayer = 0;
+    number.hxlayer = 0;
+    number.pelayer = 0;
+    number.tlayer = 0;
+    frs = 0;
+    if(nlock == 4){
+      nlock++;
+    }
+  }
   if(nlock == 0){
     mlt = Math.pow(1.1,number.tlayer);
   } else if(nlock == 1){
@@ -90,6 +104,8 @@ function updt() {
     mlt = Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(1.1,8),number.hplayer),number.hxlayer+1),number.pelayer+1),number.tlayer+1);
   } else if(nlock == 4){
     mlt = Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(1.1,16),number.olayer),number.hplayer+1),number.hxlayer+1),number.pelayer+1),number.tlayer+1);
+  } else if(nlock == 5){
+    mlt = Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(1.1,32),number.nlayer),number.olayer+1),number.hplayer+1),number.hxlayer+1),number.pelayer+1),number.tlayer+1);
   }
   prc = 1+(mlt/100);
   dnm = 1/Math.log10(prc)*20;
@@ -128,5 +144,9 @@ function updt() {
     document.getElementById("number").innerHTML = "E" + commaNumber(Math.round(number.mag)) + "#0#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1) + "#" + (number.olayer+1);
   } else if(number.tlayer > 0 && number.olayer > 0) {
     document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(1) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1) + "#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1) + "#" + (number.olayer+1);
+  } else if(number.tlayer == 0 && number.nlayer > 0) {
+    document.getElementById("number").innerHTML = "E" + commaNumber(Math.round(number.mag)) + "#0#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1) + "#" + (number.olayer+1) + "#" + (number.nlayer+1);
+  } else if(number.tlayer > 0 && number.nlayer > 0) {
+    document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(0) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1) + "#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1) + "#" + (number.olayer+1) + "#" + (number.nlayer+1);
   }
 }
