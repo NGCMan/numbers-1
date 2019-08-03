@@ -20,7 +20,7 @@ function commaNumber(x) {
         x = x.replace(pattern, "$1,$2");
     return x;
 }
-setInterval(function() {
+setInterval(function() { // If you're here (Noah?) hi
   if(number.mag < 1/mlt*2000 && number.tlayer == 0){
     number.mag++;
   } else if(number.tlayer == 0) {
