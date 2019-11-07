@@ -1,2 +1,2 @@
 # numbers
-The work of a bored programmer/googologist.
+Just saving my progress because the original has no saving.
