@@ -1,5 +1,5 @@
 var number = {
-  mag: 1.5e11,
+  mag: 1e125,
   tlayer: 0,
   pelayer: 0,
   hxlayer: 0,
