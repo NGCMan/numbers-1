@@ -1,6 +1,6 @@
 var number = {
-  mag: 1e450,
-  tlayer: 0,
+  mag: 450,
+  tlayer: 1,
   pelayer: 0,
   hxlayer: 0,
   hplayer: 0,
