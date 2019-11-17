@@ -1,11 +1,11 @@
 var number = {
-  mag: 1,
+  mag: 1e450,
   tlayer: 0,
   pelayer: 0,
   hxlayer: 0,
   hplayer: 0,
   olayer: 0,
-  nlayer: 450
+  nlayer: 0
 };
 var mlt = 1;
 var dnm = 4620;
