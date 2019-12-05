@@ -4,7 +4,9 @@ var number = {
   pelayer: 0,
   hxlayer: 0,
   hplayer: 0,
-  olayer: 0
+  olayer: 0,
+  nlayer: 0,
+  dlayer: 0
 };
 var mlt = 1;
 var dnm = 4620;
@@ -19,7 +21,7 @@ function commaNumber(x) {
         x = x.replace(pattern, "$1,$2");
     return x;
 }
-setInterval(function() {
+setInterval(function() { // If you're here (Noah?) hi
   if(number.mag < 1/mlt*2000 && number.tlayer == 0){
     number.mag++;
   } else if(number.tlayer == 0) {
@@ -31,7 +33,7 @@ setInterval(function() {
     }
   }
   updt();
-}, 1);
+}, 50);
 function updt() {
   if(number.mag >= 1e10){
     number.mag = Math.log10(number.mag);
@@ -80,6 +82,32 @@ function updt() {
       nlock++;
     }
   }
+  if(amo == 2){
+    number.mag = number.olayer;
+    number.nlayer++;
+    number.olayer = 0;
+    number.hplayer = 0;
+    number.hxlayer = 0;
+    number.pelayer = 0;
+    number.tlayer = 0;
+    frs = 0;
+    if(nlock == 4){
+      nlock++;
+    }
+  }
+    if(amo == 2){
+    number.mag = number.nlayer;
+    number.nlayer++;
+    number.olayer = 0;
+    number.hplayer = 0;
+    number.hxlayer = 0;
+    number.pelayer = 0;
+    number.tlayer = 0;
+    frs = 0;
+    if(nlock == 5){
+      nlock++;
+    }
+  }
   if(nlock == 0){
     mlt = Math.pow(1.1,number.tlayer);
   } else if(nlock == 1){
@@ -90,6 +118,10 @@ function updt() {
     mlt = Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(1.1,8),number.hplayer),number.hxlayer+1),number.pelayer+1),number.tlayer+1);
   } else if(nlock == 4){
     mlt = Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(1.1,16),number.olayer),number.hplayer+1),number.hxlayer+1),number.pelayer+1),number.tlayer+1);
+  } else if(nlock == 5){
+    mlt = Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(1.1,32),number.nlayer),number.olayer+1),number.hplayer+1),number.hxlayer+1),number.pelayer+1),number.tlayer+1);
+  } else if(nlock == 6){
+    mlt = Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(Math.pow(1.1,64),number.dlayer),number.nlayer+1),number.olayer+1),number.hplayer+1),number.hxlayer+1),number.pelayer+1),number.tlayer+1);
   }
   prc = 1+(mlt/100);
   dnm = 1/Math.log10(prc)*20;
@@ -98,35 +130,45 @@ function updt() {
   } else {
     amo=0;
   }
-  if(number.tlayer == 0 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0){
+  if(number.tlayer == 0 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0 && number.nlayer == 0){
     document.getElementById("number").innerHTML = commaNumber(Math.round(number.mag));
-  } else if(number.tlayer == 1 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0) {
+  } else if(number.tlayer == 1 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0 && number.nlayer == 0) {
     document.getElementById("number").innerHTML = Math.pow(10,number.mag%1).toFixed(6) + " × 10<sup>" + commaNumber(Math.floor(number.mag)) + "</sup>";
-  } else if(number.tlayer == 2 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0) {
+  } else if(number.tlayer == 2 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0 && number.nlayer == 0) {
     document.getElementById("number").innerHTML = "10<sup>" + Math.pow(10,number.mag%1).toFixed(6) + " × 10<sup>" + commaNumber(Math.floor(number.mag)) + "</sup></sup>";
-  } else if(number.tlayer == 3 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0) {
+  } else if(number.tlayer == 3 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0 && number.nlayer == 0) {
     document.getElementById("number").innerHTML = "10<sup>10<sup>" + Math.pow(10,number.mag%1).toFixed(6) + " × 10<sup>" + commaNumber(Math.floor(number.mag)) + "</sup></sup></sup>";
-  } else if(number.tlayer == 4 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0) {
+  } else if(number.tlayer == 4 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0 && number.nlayer == 0) {
     document.getElementById("number").innerHTML = "10<sup>10<sup>10<sup>" + Math.pow(10,number.mag%1).toFixed(6) + " × 10<sup>" + commaNumber(Math.floor(number.mag)) + "</sup></sup></sup></sup>";
-  } else if(number.tlayer == 5 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0) {
+  } else if(number.tlayer == 5 && number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0 && number.nlayer == 0) {
     document.getElementById("number").innerHTML = "10<sup>10<sup>10<sup>10<sup>" + Math.pow(10,number.mag%1).toFixed(6) + " × 10<sup>" + commaNumber(Math.floor(number.mag)) + "</sup></sup></sup></sup></sup>";
-  } else if(number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0) {
+  } else if(number.pelayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0 && number.nlayer == 0) {
     document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(4) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1);
-  } else if(number.pelayer > 0 && number.tlayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0) {
+  } else if(number.pelayer > 0 && number.tlayer == 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0 && number.nlayer == 0) {
     document.getElementById("number").innerHTML = "E" + commaNumber(Math.round(number.mag)) + "#0#" + (number.pelayer+1);
-  } else if(number.pelayer > 0 && number.tlayer > 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0) {
+  } else if(number.pelayer > 0 && number.tlayer > 0 && number.hxlayer == 0 && number.hplayer == 0 && number.olayer == 0 && number.nlayer == 0) {
     document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(4) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1) + "#" + (number.pelayer+1);
-  } else if(number.hxlayer > 0 && number.tlayer == 0 && number.hplayer == 0 && number.olayer == 0) {
+  } else if(number.hxlayer > 0 && number.tlayer == 0 && number.hplayer == 0 && number.olayer == 0 && number.nlayer == 0) {
     document.getElementById("number").innerHTML = "E" + commaNumber(Math.round(number.mag)) + "#0#" + (number.pelayer+1) + "#" + (number.hxlayer+1);
-  } else if(number.hxlayer > 0 && number.tlayer > 0 && number.hplayer == 0 && number.olayer == 0) {
+  } else if(number.hxlayer > 0 && number.tlayer > 0 && number.hplayer == 0 && number.olayer == 0 && number.nlayer == 0) {
     document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(3) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1) + "#" + (number.pelayer+1) + "#" + (number.hxlayer+1);
-  } else if(number.tlayer == 0 && number.hplayer > 0 && number.olayer == 0) {
+  } else if(number.tlayer == 0 && number.hplayer > 0 && number.olayer == 0 && number.nlayer == 0) {
     document.getElementById("number").innerHTML = "E" + commaNumber(Math.round(number.mag)) + "#0#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1);
-  } else if(number.tlayer > 0 && number.hplayer > 0 && number.olayer == 0) {
+  } else if(number.tlayer > 0 && number.hplayer > 0 && number.olayer == 0 && number.nlayer == 0) {
     document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(3) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1) + "#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1);
-  } else if(number.tlayer == 0 && number.olayer > 0) {
+  } else if(number.tlayer == 0 && number.olayer > 0 && number.nlayer == 0) {
     document.getElementById("number").innerHTML = "E" + commaNumber(Math.round(number.mag)) + "#0#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1) + "#" + (number.olayer+1);
-  } else if(number.tlayer > 0 && number.olayer > 0) {
+  } else if(number.tlayer > 0 && number.olayer > 0 && number.nlayer == 0) {
     document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(1) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1) + "#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1) + "#" + (number.olayer+1);
+  } else if(number.tlayer == 0 && number.nlayer > 0) {
+    document.getElementById("number").innerHTML = "E" + commaNumber(Math.round(number.mag)) + "#0#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1) + "#" + (number.olayer+1) + "#" + (number.nlayer+1);
+  } else if(number.tlayer > 0 && number.nlayer > 0) {
+    document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(0) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1) + "#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1) + "#" + (number.olayer+1) + "#" + (number.nlayer+1);
+  } else if(number.tlayer > 0 && number.nlayer > 0) {
+    document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(0) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1) + "#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1) + "#" + (number.olayer+1) + "#" + (number.nlayer+1)+ "#" + (number.layer+1);
+  } else if(number.tlayer > 0 && number.dlayer > 0) {
+    document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(0) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1) + "#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1) + "#" + (number.olayer+1) + "#" + (number.nlayer+1) + "#" + (number.dlayer+1);
+  } else if(number.tlayer > 0 && number.dlayer > 0) {
+    document.getElementById("number").innerHTML = "E" + Math.pow(10,number.mag%1).toFixed(0) + "E" + commaNumber(Math.floor(number.mag)) + "#" + (number.tlayer-1) + "#" + (number.pelayer+1) + "#" + (number.hxlayer+1) + "#" + (number.hplayer+1) + "#" + (number.olayer+1) + "#" + (number.nlayer+1) + "#" + (number.dlayer+1)+ "#" + (number.layer+1);
   }
 }
